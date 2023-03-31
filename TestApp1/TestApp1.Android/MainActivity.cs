@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Java.Nio;
 using Android.Graphics;
 using System.IO;
+using Java.Util.Logging;
 
 namespace TestApp1.Droid
 {
@@ -20,8 +21,10 @@ namespace TestApp1.Droid
     {
         public static MainActivity mainActivity;
         public static Action OnRecordPermission;
+        public static Action<int, Android.App.Result, Intent> ImageNotAvailableAction;
         public static Action<int, Android.App.Result, Intent> OnActivityResultAction;
         private readonly SemaphoreSlim _semaphoreSlim = new SemaphoreSlim(1, 1);
+        private readonly RecordingSerivce _recordingSerivce = new RecordingSerivce();
 
         Image _image;
         protected override void OnCreate(Bundle savedInstanceState)
@@ -39,10 +42,10 @@ namespace TestApp1.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-            //if (requestCode == ScreenCaptureFragment.REQUEST_RECORD_AUDIO_PERMISSION)
-            //{
-            //    OnRecordPermission?.Invoke();
-            //}
+            if (requestCode == ScreenCaptureFragment.REQUEST_RECORD_AUDIO_PERMISSION)
+            {
+                OnRecordPermission?.Invoke();
+            }
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
@@ -50,7 +53,7 @@ namespace TestApp1.Droid
             OnActivityResultAction?.Invoke(requestCode, resultCode, data);
             base.OnActivityResult(requestCode, resultCode, data);
         }
-    
+
         public async void OnImageAvailable(ImageReader reader)
         {
             try
@@ -60,6 +63,7 @@ namespace TestApp1.Droid
 
                 if (_image is null)
                 {
+                    _recordingSerivce.ServiceStopedNotification();
                     return;
                 }
 
@@ -70,11 +74,12 @@ namespace TestApp1.Droid
 
                 _image?.Close();
 
-                await Task.Delay(10000);
+                await Task.Delay(5000);
 
             }
             catch (Exception ee)
             {
+
                 Console.WriteLine(ee);
             }
             finally

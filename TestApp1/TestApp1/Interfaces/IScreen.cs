@@ -8,5 +8,7 @@ namespace TestApp1.Interfaces
     public interface IScreen
     {
         void StartWo();
+        void StartWorkForAudio();
+        void Stop();
     }
 }

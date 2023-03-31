@@ -78,5 +78,17 @@ namespace TestApp1.iOS
         {
             _isAllowed = true;
         }
+
+        public void StartWorkForAudio()
+        {
+            throw new NotImplementedException();
+        }
+        private NSTimer _timer;
+        public void Stop()
+        {
+            _timer?.Invalidate();
+            _timer = null;
+        }
+
     }
 }
