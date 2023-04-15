@@ -50,8 +50,8 @@ namespace TestApp1.Droid
 
             try
             {
-                
-                
+
+
                 var _manager = (NotificationManager)AndroidApp.Context.GetSystemService(AndroidApp.NotificationService);
 
                 if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
@@ -77,7 +77,7 @@ namespace TestApp1.Droid
             }
             catch (Exception ee)
             {
-               
+
             }
             return StartCommandResult.Sticky;
 
@@ -128,7 +128,6 @@ namespace TestApp1.Droid
             {
 
                 var screenDensity = (int)Resources.DisplayMetrics.DensityDpi;
-
                 var height = Resources.DisplayMetrics.HeightPixels;
                 var width = Resources.DisplayMetrics.WidthPixels;
 
@@ -201,7 +200,7 @@ namespace TestApp1.Droid
                         outputStream.Write(audioBuffer, 0, bytesRead);
                     }
                 }
-                Console.WriteLine("Audio file is : "+ audioFile);
+                Console.WriteLine("Audio file is : " + audioFile);
                 audioRecord.Release();
                 audioRecord.Dispose();
                 outputStream.Flush();
@@ -220,11 +219,10 @@ namespace TestApp1.Droid
 
         private string GetFilePath()
         {
-            //string folderPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/MyApp";
-
             var folderPath = Android.App.Application.Context.GetExternalFilesDir(string.Empty).AbsolutePath + "/Audio";
             Directory.CreateDirectory(folderPath);
             return System.IO.Path.Combine(folderPath, $"audio{System.IO.Path.GetRandomFileName()}");
         }
+
     }
 }

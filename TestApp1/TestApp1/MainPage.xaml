@@ -2,12 +2,38 @@
 <ContentPage
     x:Class="TestApp1.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="this">
 
     <StackLayout Margin="50" Spacing="10">
         <Button Clicked="Button_Clicked" Text="Start Capturing" />
         <Button Clicked="Stop_Button_Clicked" Text="Stop Capturing" />
         <Button Clicked="Record_Button_Clicked" Text="Start Recording" />
+
+        <Button Clicked="Button_Clicked_1" Text="GetFiles" />
+
+        <Button Clicked="Delete_Button_Clicked_2" Text="Delete Files" />
+
+        <Button Clicked="SaveAudio" Text="Save Audio At Server" />
+
+        <Label x:Name="timerLabel" />
+        <Label x:Name="filecountlbl" />
+
+        <ListView x:Name="DataList" IsPullToRefreshEnabled="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Spacing="10">
+                            <Image
+                                Aspect="AspectFit"
+                                HeightRequest="50"
+                                Source="{Binding source}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </StackLayout>
 
 </ContentPage>

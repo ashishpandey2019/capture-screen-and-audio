@@ -59,6 +59,8 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckForServiceRunning.cs" />
+    <Compile Include="CustomClass\GetImagePathDroid.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="NotificationReceiver.cs" />
     <Compile Include="RecordingSerivce.cs" />

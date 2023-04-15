@@ -81,7 +81,7 @@ namespace TestApp1.iOS
 
         public void StartWorkForAudio()
         {
-            throw new NotImplementedException();
+
         }
         private NSTimer _timer;
         public void Stop()
